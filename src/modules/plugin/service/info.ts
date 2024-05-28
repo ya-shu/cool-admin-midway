@@ -144,7 +144,7 @@ export class PluginService extends BaseService {
     ...params
   ) {
     // 实例
-    const instance = await this.getInstance(key);
+    const instance: any = await this.getInstance(key);
     return await instance[method](...params);
   }
 
