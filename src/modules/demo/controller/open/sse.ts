@@ -30,7 +30,7 @@ export class OpenDemoSSEController extends BaseController {
     };
 
     // 获取插件实例
-    const instance = await this.pluginService.getInstance('ollama');
+    const instance: any = await this.pluginService.getInstance('ollama');
     // 调用chat
     const messages = [
       { role: 'system', content: '你叫小酷，是个编程助手' },
