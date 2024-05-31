@@ -60,7 +60,13 @@ export class PluginService extends BaseService {
    */
   async addOrUpdate(param: any, type?: 'add' | 'update') {
     await super.addOrUpdate(param, type);
-    const info = await this.pluginInfoEntity.findOneBy({ id: param.id });
+    const info = await this.pluginInfoEntity
+      .createQueryBuilder('a')
+      .select(['a.id', 'a.keyName', 'a.status', 'a.hook'])
+      .where({
+        id: Equal(param.id),
+      })
+      .getOne();
     if (info.status == 1) {
       await this.reInit(info.keyName);
     } else {
