@@ -80,7 +80,7 @@ export class PluginTypesService extends BaseService {
     };
 
     const program = ts.createProgram(['file.ts'], options, compilerHost);
-    const emitResult = program.emit();
+    program.emit();
 
     if (!output) {
       // Provide a default value if the output is still empty
@@ -231,6 +231,7 @@ export class PluginTypesService extends BaseService {
   async reGenerate() {
     const pluginInfos = await this.pluginInfoEntity
       .createQueryBuilder('a')
+      .where('a.status = :status', { status: 1 })
       .select(['a.id', 'a.status', 'a.tsContent', 'a.keyName'])
       .getMany();
     for (const pluginInfo of pluginInfos) {
