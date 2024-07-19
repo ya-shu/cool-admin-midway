@@ -32,6 +32,8 @@ export default {
     eps: true,
     // 是否自动导入模块数据库
     initDB: true,
+    // 判断是否初始化的方式
+    initJudge: 'db',
     // 是否自动导入模块菜单
     initMenu: true,
   } as CoolConfig,

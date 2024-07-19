@@ -32,6 +32,11 @@ export class BaseAppEvent {
     this.checkKeys();
   }
 
+  @Event('onServerReady')
+  async onServerReady() {
+    this.coreLogger.info(`服务启动成功，端口：${this.port}`);
+  }
+
   /**
    * 检查配置
    */
