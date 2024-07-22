@@ -1,12 +1,12 @@
-import { Inject, Provide } from '@midwayjs/decorator';
 import { BaseService, CoolCommException } from '@cool-midway/core';
+import { Inject, Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { Equal, Repository } from 'typeorm';
-import { UserInfoEntity } from '../entity/info';
-import { v1 as uuid } from 'uuid';
-import { UserSmsService } from './sms';
 import * as md5 from 'md5';
+import { Equal, Repository } from 'typeorm';
+import { v1 as uuid } from 'uuid';
 import { PluginService } from '../../plugin/service/info';
+import { UserInfoEntity } from '../entity/info';
+import { UserSmsService } from './sms';
 import { UserWxService } from './wx';
 
 /**
@@ -45,7 +45,9 @@ export class UserInfoService extends BaseService {
    * @returns
    */
   async person(id) {
-    return await this.userInfoEntity.findOneBy({ id: Equal(id) });
+    const info = await this.userInfoEntity.findOneBy({ id: Equal(id) });
+    delete info.password;
+    return info;
   }
 
   /**
