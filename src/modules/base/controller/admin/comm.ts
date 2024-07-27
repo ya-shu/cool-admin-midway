@@ -1,15 +1,22 @@
-import { Provide, Inject, Get, Post, Body, ALL } from '@midwayjs/decorator';
-import { CoolController, BaseController } from '@cool-midway/core';
+import {
+  BaseController,
+  CoolController,
+  CoolTag,
+  CoolUrlTag,
+  TagTypes,
+} from '@cool-midway/core';
+import { ALL, Body, Get, Inject, Post, Provide } from '@midwayjs/decorator';
+import { Context } from '@midwayjs/koa';
+import { PluginService } from '../../../plugin/service/info';
 import { BaseSysUserEntity } from '../../entity/sys/user';
 import { BaseSysLoginService } from '../../service/sys/login';
 import { BaseSysPermsService } from '../../service/sys/perms';
 import { BaseSysUserService } from '../../service/sys/user';
-import { Context } from '@midwayjs/koa';
-import { PluginService } from '../../../plugin/service/info';
 
 /**
  * Base 通用接口 一般写不需要权限过滤的接口
  */
+@CoolUrlTag()
 @Provide()
 @CoolController()
 export class BaseCommController extends BaseController {
@@ -84,6 +91,7 @@ export class BaseCommController extends BaseController {
     return this.ok();
   }
 
+  @CoolTag(TagTypes.IGNORE_TOKEN)
   @Get('/program', { summary: '编程' })
   async program() {
     return this.ok('Node');
