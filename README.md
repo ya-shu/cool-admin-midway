@@ -169,4 +169,4 @@ export class DemoAppGoodsController extends BaseController {
 
 ### 低价服务器
 
-[阿里云、腾讯云、华为云低价云服务器，不限新老](https://cool-js.com/ad/server.html)
+[阿里云、腾讯云、华为云低价云服务器，不限新老](https://cool-js.com/service/cloud)
