@@ -1,13 +1,14 @@
-import { App, Provide } from '@midwayjs/decorator';
 import { BaseService } from '@cool-midway/core';
-import * as ts from 'typescript';
-import { IMidwayApplication } from '@midwayjs/core';
-import * as path from 'path';
-import * as fs from 'fs';
+import { IMidwayApplication, Inject } from '@midwayjs/core';
+import { App, Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { Repository } from 'typeorm';
-import { PluginInfoEntity } from '../entity/info';
+import * as fs from 'fs';
+import * as path from 'path';
 import * as prettier from 'prettier';
+import { Repository } from 'typeorm';
+import * as ts from 'typescript';
+import { Utils } from '../../../comm/utils';
+import { PluginInfoEntity } from '../entity/info';
 
 /**
  * 插件类型服务
@@ -19,6 +20,9 @@ export class PluginTypesService extends BaseService {
 
   @InjectEntityModel(PluginInfoEntity)
   pluginInfoEntity: Repository<PluginInfoEntity>;
+
+  @Inject()
+  utils: Utils;
 
   /**
    * 生成d.ts文件
@@ -238,6 +242,7 @@ export class PluginTypesService extends BaseService {
       const tsContent = pluginInfo.tsContent?.data;
       if (tsContent) {
         await this.generateDtsFile(pluginInfo.keyName, tsContent);
+        await this.utils.sleep(200);
       }
     }
   }
