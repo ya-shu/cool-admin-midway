@@ -1,4 +1,5 @@
 import { CoolEvent, Event } from '@cool-midway/core';
+import { CachingFactory, MidwayCache } from '@midwayjs/cache-manager';
 import {
   App,
   Config,
@@ -9,7 +10,6 @@ import {
 } from '@midwayjs/core';
 import { IMidwayKoaApplication } from '@midwayjs/koa';
 import { PLUGIN_CACHE_KEY, PluginCenterService } from '../service/center';
-import { CachingFactory, MidwayCache } from '@midwayjs/cache-manager';
 import { PluginTypesService } from '../service/types';
 
 /**
@@ -39,6 +39,6 @@ export class PluginAppEvent {
   async onServerReady() {
     await this.midwayCache.set(PLUGIN_CACHE_KEY, []);
     this.pluginCenterService.init();
-    this.pluginTypesService.reGenerate();
+    // this.pluginTypesService.reGenerate();
   }
 }
