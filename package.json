@@ -55,7 +55,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production node ./bootstrap.js",
+    "start": "NODE_ENV=prod node ./bootstrap.js",
     "dev": "cross-env NODE_ENV=local mwtsc --watch --run @midwayjs/mock/app.js --keepalive",
     "cov": "jest --coverage",
     "lint": "mwts check",
